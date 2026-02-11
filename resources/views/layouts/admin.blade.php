@@ -24,10 +24,10 @@
                 <a href="{{ route('admin.orders.index') }}" class="block py-2.5 px-4 hover:bg-gray-700 {{ request()->routeIs('admin.orders.*') ? 'bg-gray-700' : '' }}">
                     <i class="fas fa-shopping-cart mr-2"></i> Orders
                 </a>
-                <a href="#" class="block py-2.5 px-4 hover:bg-gray-700">
+                <a href="{{ route('admin.customers.index') }}" class="block py-2.5 px-4 hover:bg-gray-700 {{ request()->routeIs('admin.customers.*') ? 'bg-gray-700' : '' }}">
                     <i class="fas fa-users mr-2"></i> Customers
                 </a>
-                <a href="#" class="block py-2.5 px-4 hover:bg-gray-700">
+                <a href="{{ route('admin.reports.index') }}" class="block py-2.5 px-4 hover:bg-gray-700 {{ request()->routeIs('admin.reports.*') ? 'bg-gray-700' : '' }}">
                     <i class="fas fa-chart-bar mr-2"></i> Reports
                 </a>
                 <a href="{{ route('home') }}" class="block py-2.5 px-4 hover:bg-gray-700">
