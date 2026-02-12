@@ -23,13 +23,46 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Create Customer User
-        User::create([
+        $customer = User::create([
             'name' => 'John Doe',
             'email' => 'customer@example.com',
             'password' => Hash::make('password'),
             'role' => 'customer',
             'phone' => '+1234567891',
             'is_active' => true,
+        ]);
+
+        // Create default addresses for customer
+        \App\Models\Address::create([
+            'user_id' => $customer->id,
+            'type' => 'shipping',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'email' => 'customer@example.com',
+            'phone' => '+1234567891',
+            'address_line_1' => '123 Main Street',
+            'address_line_2' => 'Apt 4B',
+            'city' => 'New York',
+            'state' => 'NY',
+            'postal_code' => '10001',
+            'country' => 'US',
+            'is_default' => true,
+        ]);
+
+        \App\Models\Address::create([
+            'user_id' => $customer->id,
+            'type' => 'billing',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'email' => 'customer@example.com',
+            'phone' => '+1234567891',
+            'address_line_1' => '123 Main Street',
+            'address_line_2' => 'Apt 4B',
+            'city' => 'New York',
+            'state' => 'NY',
+            'postal_code' => '10001',
+            'country' => 'US',
+            'is_default' => true,
         ]);
 
         // Create Categories
