@@ -27,6 +27,7 @@
                             <a href="{{ route('admin.dashboard') }}" class="text-gray-700 hover:text-indigo-600">Admin</a>
                         @endif
                         <a href="{{ route('orders.index') }}" class="text-gray-700 hover:text-indigo-600">My Orders</a>
+                        <a href="{{ route('profile.index') }}" class="text-gray-700 hover:text-indigo-600">My Profile</a>
                         <form method="POST" action="{{ route('logout') }}" class="inline">
                             @csrf
                             <button type="submit" class="text-gray-700 hover:text-indigo-600">Logout</button>

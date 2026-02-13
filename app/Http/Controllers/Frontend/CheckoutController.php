@@ -25,7 +25,8 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
         }
 
-        $addresses = Auth::user()->addresses;
+        // Get only saved addresses (not order-specific addresses)
+        $addresses = Auth::user()->addresses()->whereNull('order_id')->get();
         
         $subtotal = $cart_items->sum(function($item) {
             return $item->product->final_price * $item->quantity;

@@ -28,4 +28,25 @@ class OrderController extends Controller
 
         return view('frontend.orders.show', compact('order'));
     }
+
+    public function cancel($id)
+    {
+        $order = Auth::user()->orders()->findOrFail($id);
+
+        // Only allow cancellation for pending or processing orders
+        if (!in_array($order->status, ['pending', 'processing'])) {
+            return back()->with('error', 'This order cannot be cancelled.');
+        }
+
+        $order->update(['status' => 'cancelled']);
+
+        // Restore product quantities
+        foreach ($order->items as $item) {
+            if ($item->product) {
+                $item->product->increment('quantity', $item->quantity);
+            }
+        }
+
+        return back()->with('success', 'Order cancelled successfully!');
+    }
 }

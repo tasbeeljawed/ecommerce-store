@@ -188,9 +188,14 @@
                     @endif
                     
                     @if(in_array($order->status, ['pending', 'processing']))
-                        <button class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 font-semibold">
-                            <i class="fas fa-times mr-2"></i> Cancel Order
-                        </button>
+                        <form action="{{ route('orders.cancel', $order->id) }}" 
+                              method="POST"
+                              onsubmit="return confirm('Are you sure you want to cancel this order?')">
+                            @csrf
+                            <button type="submit" class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 font-semibold">
+                                <i class="fas fa-times mr-2"></i> Cancel Order
+                            </button>
+                        </form>
                     @endif
                     
                     <button class="w-full bg-gray-200 text-gray-800 py-2 rounded-lg hover:bg-gray-300 font-semibold">

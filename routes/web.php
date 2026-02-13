@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\OrderController;
+use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
@@ -39,6 +40,18 @@ Route::middleware(['auth'])->group(function () {
     // My Orders
     Route::get('/my-orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/my-orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+    Route::post('/my-orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
+    
+    // Profile
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    
+    // Address Management
+    Route::get('/profile/address/create', [ProfileController::class, 'createAddress'])->name('profile.address.create');
+    Route::post('/profile/address', [ProfileController::class, 'storeAddress'])->name('profile.address.store');
+    Route::get('/profile/address/{address}/edit', [ProfileController::class, 'editAddress'])->name('profile.address.edit');
+    Route::patch('/profile/address/{address}', [ProfileController::class, 'updateAddress'])->name('profile.address.update');
+    Route::delete('/profile/address/{address}', [ProfileController::class, 'deleteAddress'])->name('profile.address.delete');
 });
 
 /*
